@@ -1,14 +1,17 @@
 import "./styles.css";
 // import "./template.html";
-
-const header = document.createElement("h1");
-header.textContent = "Todo List";
-document.body.appendChild(header);
-
+const projects=[];
 function todo(title, description, duedate, priority) {
     return { title, description, duedate, priority};
 }
 
+const todo1=todo("Priyanshu","description1","duedate1","priority1");
+const todo2=todo("Ayush","description2","duedate2","priority2");
+const todo3=todo("Daksh","description3","duedate3","priority3");
+
+const todo4=todo("Dhruv","description4","duedate4","priority4");
+const todo5=todo("Harsh","description5","duedate5","priority5");
+const todo6=todo("Rahul","description6","duedate6","priority6");
 
 class Project{
     constructor(title){
@@ -16,44 +19,57 @@ class Project{
         this.todos=[];
     }
 
-    addtodo(todoInstance){
+    addTodo(todoInstance) {
         this.todos.push(todoInstance);
     }
+
+
 }
 
-const projects=["Inbox","Today","Upcoming"];
-const inbox=new Project("Inbox");
-const today=new Project("Today");
-const upcoming=new Project("Upcoming");
+// const inbox=new Project("Inbox");
+// const today=new Project("Today");
+// const upcoming=new Project("Upcoming");
+const renderSingleProject = (proj) => {
+    const projname = proj.title;
+    const projdiv = `<div class="projname">${projname}</div>`;
+    document.querySelector(".projects").insertAdjacentHTML("beforeend", projdiv);
+};
 
-const gettodo=()=>{
-    const projname="Inbox";
-    const todo1={
-        title:"Todo 1",
-        description:"description 1",
-        duedate:"duedate 1",
-        priority:"priority 1"
-    }
-}
-const addTodo=(todo1)=>{
-    showtodo();
+const createproject=(proj)=>{
+    projects.push(proj);
+        renderSingleProject(proj);
 }
 
-const showtodo=()=>{
-    todos.forEach(todo => {
-        const todolist=document.querySelector(".todo-list");
+
+createproject(new Project("inbox"));
+createproject(new Project("today"));
+createproject(new Project("upcoming"));
+
+// inbox.addTodo(todo1);
+// inbox.addTodo(todo2);
+// inbox.addTodo(todo3);
+
+// today.addTodo(todo4);
+// today.addTodo(todo5);
+// today.addTodo(todo6);
+
+
+const showtodos=(projname)=>{
+    const todos=projname.todos;
+    const todolist=document.querySelector(".todo-list");
+    todos.forEach(todo => {    
         const div=`<div>
             <h1>${todo.title}</h1>
             <p>${todo.description}</p>
             <p>${todo.duedate}</p>
             <p>${todo.priority}</p>
             </div>`;
-        todolist.innerHTML+=div;
+        todolist.insertAdjacentHTML("beforeend",div);
     });
 }
 
-addTodo("todo1","description1","duedate1","priority1");
-addTodo("todo2","description2","duedate2","priority2");
-addTodo("todo3","description3","duedate3","priority3");
 
+
+
+// showtodos(today);
 // document.getElementById("addtodo").addEventListener("click",addTodo);

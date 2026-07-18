@@ -1,3 +1,34 @@
-body {
-  background-color: #4a0269;  
+*{
+  margin: 0;
+  padding: 0;
+}
+header{
+  background-color: rgb(183, 5, 183);
+  height: 70px;
+}
+header h1{
+  font-size: 40px;
+  color: rgb(235, 231, 240);
+  text-align: center;
+  padding: 15px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.content{
+  display: flex;
+}
+.projects{
+  background-color: lightgrey;
+  width: 30vw;
+  height:100vh;
+  top: 100px;
+}
+.todo-list{
+  width: 70vw;
+  height: 100vh;
+}
+
+svg{
+  position: absolute;
+  bottom: 50px;
+  left: 10px;
 }
