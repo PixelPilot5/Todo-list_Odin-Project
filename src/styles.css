@@ -32,3 +32,321 @@ svg{
   bottom: 50px;
   left: 10px;
 }
+.project-list{
+  padding-top: 50px;
+  list-style-type:disc;
+  padding-left: 50px;
+  font-size: 20px;
+}
+.project-name{
+  padding: 10px;
+  font-size: 26px;
+  font-family: sans-serif;
+}
+.project-name:hover{
+  cursor: pointer;
+  background-color: rgb(184, 166, 166);
+}
+
+.todo-list{
+  /* display: flex; */
+  /* justify-content: center; */
+}
+.todo-list div{
+  display: flex;
+  justify-content: space-between;
+  padding-left: 2px;
+  align-items: center;
+  height: 50px;
+  font-size: 20px;
+  margin: 50px;
+  background-color: aliceblue;
+  gap: 10px;
+
+}
+.add:hover{
+cursor: pointer;
+}
+
+/* The background overlay covering the entire viewport */
+:root {
+  --header-bg: #c28b97;
+  --sidebar-bg: #ececec;
+  --form-bg: #fafafa;
+  --accent-green: #10b981;
+  --accent-orange: #f59e0b;
+  --accent-red: #ef4444;
+  --text-dark: #4b5563;
+  --text-muted: #9ca3af;
+}
+
+/* Reset baseline padding styles inside your container */
+.form-popup * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Reusing the overlay container with the backdrop blur we set up earlier */
+
+.form-overlay {
+  display: none;
+position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+}
+.form-overlay.show{
+  display: flex;
+}
+
+/* Main Box Modal layout matching image aspect ratio */
+.form-popup {
+  width: 850px;
+  height: 480px;
+  background-color: var(--form-bg);
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+/* Header style band */
+.popup-header {
+  background-color: var(--header-bg);
+  padding: 12px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.popup-header h2 {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 32px;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: white;
+}
+
+/* Main inner Split Body layout */
+.popup-body {
+  height: 90%;
+  display: flex;
+  flex: 1;
+}
+
+/* Left Nav styling */
+.popup-sidebar {
+  width: 180px;
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid #dcdcdc;
+  padding-top: 20px;
+}
+
+.popup-sidebar ul {
+  list-style: none;
+}
+
+.popup-sidebar li {
+  padding: 14px 24px;
+  font-size: 20px;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.popup-sidebar li.active {
+  color: #551a28; /* Deep rich wine color from the original mockup image */
+  font-weight: 500;
+}
+
+.popup-sidebar li .slash {
+  font-weight: bold;
+  margin-right: 2px;
+}
+
+/* Right Input form container grid layout */
+.popup-form {
+  flex: 1;
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Blends labels smoothly inline with seamless text boxes */
+.inline-group {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 25px;
+}
+
+.inline-group label {
+  font-size: 20px;
+  color: var(--text-muted);
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.inline-group input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  color: var(--text-dark);
+  padding: 4px 0;
+  outline: none;
+}
+
+.inline-group input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Form Controls Block pinned along the baseline */
+.form-controls {
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  row-gap: 15px;
+  column-gap: 20px;
+  align-items: center;
+}
+
+.control-row {
+  grid-column: 1 / 2;
+  display: flex;
+  align-items: center;
+}
+
+.control-row label, 
+.label-mock {
+  font-size: 18px;
+  color: #111;
+  width: 100px;
+}
+
+/* Styled HTML Date Box */
+#due-date {
+  border: 1px solid var(--accent-green);
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: var(--accent-green);
+  outline: none;
+  background: white;
+}
+
+/* Priority Button Grid Wrapper */
+.priority-group {
+  display: flex;
+  gap: 12px;
+}
+
+.priority-btn {
+  background: white;
+  border: 1px solid transparent;
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.priority-btn.low {
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+}
+
+.priority-btn.medium {
+  border-color: var(--accent-orange);
+  color: var(--accent-orange);
+}
+
+.priority-btn.high {
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+}
+
+/* Action Execution button styled at bottom-right corner grid cell */
+.submit-btn {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  /* justify-self: end; */
+  /* align-self: end; */
+  background: white;
+  border: 1px solid var(--accent-green);
+  color: var(--accent-green);
+  padding: 8px 16px;
+  font-weight: bold;
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  right: -100px;
+}
+
+.submit-btn:hover {
+  background-color: var(--accent-green);
+  color: white;
+}
+
+.popup-right{
+display: flex;
+flex-direction: column;
+}
+
+.submit-proj{
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  /* justify-self: end; */
+  /* align-self: end; */
+  background: white;
+  border: 1px solid var(--accent-green);
+  color: var(--accent-green);
+  padding: 8px 16px;
+  font-weight: bold;
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  right: -10px;
+  bottom: -260px;
+}
+.submit-proj:hover {
+  background-color: var(--accent-green);
+  color: white;
+}
+
+#todo-form:hover{
+  background-color: var(--header-bg);
+  color: aliceblue;
+}
+
+#project-form:hover{
+  background-color: var(--header-bg);
+  color: aliceblue;
+}
