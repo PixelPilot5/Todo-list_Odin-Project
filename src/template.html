@@ -51,7 +51,7 @@
 
         <div class="form-group inline-group">
           <label for="todo-details">Details:</label>
-          <input type="text" id="todo-details" placeholder="e.g internet, phone, rent.">
+          <input type="text" id="todo-details" placeholder="e.g internet, phone, rent." required>
         </div>
 
         <!-- Sticky Bottom Section for Controls -->
@@ -63,10 +63,10 @@
 
           <div class="control-row">
             <span class="label-mock">Priority:</span>
-            <div class="priority-group">
-              <button type="button" class="priority-btn low">LOW</button>
-              <button type="button" class="priority-btn medium">MEDIUM</button>
-              <button type="button" class="priority-btn high">HIGH</button>
+            <div class="priority-group" id="priority-group">
+              <button type="button" class="priority-btn low" priority="low">LOW</button>
+              <button type="button" class="priority-btn medium" priority="medium">MEDIUM</button>
+              <button type="button" class="priority-btn high" priority="high">HIGH</button>
             </div>
           </div>
 

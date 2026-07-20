@@ -4,7 +4,6 @@ const projects=[];
 function todo(title, description, duedate, priority) {
     return { title, description, duedate, priority};
 }
-
 const todo1=todo("Priyanshu","description1","duedate1","priority1");
 const todo2=todo("Ayush","description2","duedate2","priority2");
 const todo3=todo("Daksh","description3","duedate3","priority3");
@@ -33,8 +32,20 @@ const renderSingleProject = (proj) => {
     const projname = proj.title;
     const projdiv = `<li class="project-name" data-id="${projects.indexOf(proj)}">${projname}</li>`;
     document.querySelector(".project-list").insertAdjacentHTML("beforeend", projdiv);
-    document.querySelector(".project-list").lastChild.addEventListener("click",()=>{
+    const projectList = document.querySelector(".project-list");
+const newProjectElement = projectList.lastElementChild;
+
+    newProjectElement.addEventListener("click", (e) => {
         showtodos(proj);
+
+        // 1. Target all list ITEMS (.project-name), not the parent container (.project-list)
+        const allProjectItems = document.querySelectorAll(".project-name");
+        allProjectItems.forEach((item) => {
+            item.classList.remove("active-project");
+        });
+
+        // 2. Add active-project ONLY to the item that was actually clicked
+        e.currentTarget.classList.add("active-project");
     });
 };
 
@@ -103,7 +114,7 @@ const todoformcontent=`      <form class="popup-form">
 
         <div class="form-group inline-group">
           <label for="todo-details">Details:</label>
-          <input type="text" id="todo-details" placeholder="e.g internet, phone, rent.">
+          <input type="text" id="todo-details" placeholder="e.g internet, phone, rent." required>
         </div>
 
         <!-- Sticky Bottom Section for Controls -->
@@ -148,3 +159,47 @@ document.getElementById("project-form").addEventListener("click",()=>{
     document.querySelector(".popup-right").innerHTML=``;
     document.querySelector(".popup-right").insertAdjacentHTML("beforeend",projecttformcontent);
 });
+
+document.querySelector(".submit-btn").addEventListener("click",(e)=>{
+    e.preventDefault();
+    const title=document.querySelector("#todo-title").value;
+    const description=document.querySelector("#todo-details").value;
+    const duedate=document.querySelector("#due-date").value;
+    // const priority=document.querySelector(".priority-btn.active").value;
+    const priority = document.querySelector(".priority-btn.active").getAttribute("priority");
+    // const priority="Low";
+    if (!title) return alert("Please enter a title");
+    if (!description) return alert("Please enter a description");
+    if (!duedate) return alert("Please enter a due date");
+    if (!priority) return alert("Please enter a priority");
+    const newtodo=todo(title,description,duedate,priority);
+
+    const activeproject=projects.find((proj)=>proj.title==document.querySelector(".active-project").textContent);
+    
+
+if (activeproject) {
+        activeproject.addTodo(newtodo);
+        closeForm();
+        showtodos(activeproject);
+        document.querySelector("#todo-title").value="";
+        document.querySelector("#todo-details").value="";
+        document.querySelector("#due-date").value="";
+        document.querySelector(".priority-btn.active").classList.remove("active");
+    }
+
+});
+
+
+const priorityBtns = document.querySelectorAll(".priority-btn");
+
+priorityBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    // Remove 'active' from all buttons
+    priorityBtns.forEach((b) => b.classList.remove("active"));
+    
+    // Add 'active' to the clicked button
+    btn.classList.add("active");
+  });
+});
+
+

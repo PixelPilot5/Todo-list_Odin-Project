@@ -350,3 +350,18 @@ flex-direction: column;
   background-color: var(--header-bg);
   color: aliceblue;
 }
+
+.priority-btn.low.active {
+  background-color: #008000;
+  color: white;
+}
+
+.priority-btn.medium.active {
+  background-color: #ffa500;
+  color: white;
+}
+
+.priority-btn.high.active {
+  background-color: #ff0000;
+  color: white;
+}
