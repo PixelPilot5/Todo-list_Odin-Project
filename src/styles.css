@@ -21,6 +21,7 @@ header h1{
   width: 30vw;
   height:100vh;
   top: 100px;
+  
 }
 .todo-list{
   width: 70vw;
@@ -177,7 +178,7 @@ position: fixed;
   transition: background-color 0.2s;
 }
 
-.popup-sidebar li.active {
+.popup-sidebar li {
   color: #551a28; /* Deep rich wine color from the original mockup image */
   font-weight: 500;
 }
@@ -347,6 +348,7 @@ flex-direction: column;
 }
 
 #project-form:hover{
+  
   background-color: var(--header-bg);
   color: aliceblue;
 }

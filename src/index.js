@@ -140,8 +140,8 @@ const todoformcontent=`      <form class="popup-form">
 
 const projecttformcontent=`        <form class="popup-form">
         <div class="form-group inline-group">
-          <label for="todo-title">Title:</label>
-            <input type="text" id="todo-title" placeholder="House Renovation" required>
+          <label for="project-title">Title:</label>
+            <input type="text" id="project-title" placeholder="House Renovation" required>
         </div>
 
 
@@ -165,30 +165,35 @@ document.querySelector(".submit-btn").addEventListener("click",(e)=>{
     const title=document.querySelector("#todo-title").value;
     const description=document.querySelector("#todo-details").value;
     const duedate=document.querySelector("#due-date").value;
-    // const priority=document.querySelector(".priority-btn.active").value;
-    const priority = document.querySelector(".priority-btn.active").getAttribute("priority");
-    // const priority="Low";
+const activePriorityBtn = document.querySelector(".priority-btn.active");
+const priority = activePriorityBtn?.getAttribute("priority") || "low";
+
     if (!title) return alert("Please enter a title");
     if (!description) return alert("Please enter a description");
     if (!duedate) return alert("Please enter a due date");
-    if (!priority) return alert("Please enter a priority");
     const newtodo=todo(title,description,duedate,priority);
 
-    const activeproject=projects.find((proj)=>proj.title==document.querySelector(".active-project").textContent);
-    
+// 1. Try to find the active project element in the DOM
+const activeProjectEl = document.querySelector(".active-project");
 
-if (activeproject) {
-        activeproject.addTodo(newtodo);
-        closeForm();
-        showtodos(activeproject);
-        document.querySelector("#todo-title").value="";
-        document.querySelector("#todo-details").value="";
-        document.querySelector("#due-date").value="";
-        document.querySelector(".priority-btn.active").classList.remove("active");
-    }
+// 2. Get the title safely (if no active project, fallback to "Inbox")
+const activeTitle = activeProjectEl ? activeProjectEl.textContent.trim() : "Inbox";
 
+// 3. Find the matching project object in your array
+const activeproject = projects.find((proj) => proj.title === activeTitle);
+
+// 4. Guard check in case even the fallback wasn't found
+if (!activeproject) {
+    return alert("No active project selected!");
+}
+
+activeproject.addTodo(newtodo);
+closeForm();
+showtodos(activeproject);
+document.querySelector("#todo-title").value="";
+document.querySelector("#todo-details").value="";
+document.querySelector("#due-date").value="";
 });
-
 
 const priorityBtns = document.querySelectorAll(".priority-btn");
 
@@ -200,6 +205,30 @@ priorityBtns.forEach((btn) => {
     // Add 'active' to the clicked button
     btn.classList.add("active");
   });
+});
+
+
+
+document.addEventListener("click", (e) => {
+    // Check if the clicked element (or its parent) has the .submit-proj class
+    if (e.target.matches(".submit-proj") || e.target.closest(".submit-proj")) {
+        e.preventDefault();
+        
+        // console.log("Project submit button clicked!"); // This will definitely fire now
+
+        const titleInput = document.querySelector("#project-title");
+        const title = titleInput ? titleInput.value.trim() : "";
+
+        if (!title) return alert("Please enter a title");
+
+        const newproject = new Project(title);
+        createproject(newproject);
+
+        if (titleInput) titleInput.value = "";
+        closeForm();
+        
+        // console.log("Projects array:", projects);
+    }
 });
 
 
